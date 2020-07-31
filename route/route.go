@@ -3,6 +3,7 @@ package route
 import(
 	"github.com/gin-gonic/gin"
 	"blog/ctrls"
+	"blog/middlewares"
 )
 
 
@@ -26,7 +27,7 @@ func (ro *Router)API(){
 	//后台管理
 	ro.engine.POST("/admin/login",ro.userCtrl.Login) //登录
 	//找回密码
-	bak := ro.engine.Group("/admin")
+	bak := ro.engine.Group("/admin",middlewares.JWTAuth())
 	{
 		//标签管理
 		tag := bak.Group("/tag")
