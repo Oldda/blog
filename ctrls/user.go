@@ -3,41 +3,38 @@ package ctrls
 import(
 	"github.com/gin-gonic/gin"
 	"blog/business"
-	"blog/model"
-	"fmt"
+	"blog/util"
 )
-
-type User struct{
-	ub *business.User
-}
-
-func NewUser()*User{
-	return &User{
-		ub:business.NewUser(),
-	}
-}
-
-//登录
-func(u *User)Login(ctx *gin.Context){
-	var user *model.User
-	var err error
+// @Summary 登录
+// @Description 统一登录接口，暂时接收账号密码登录和手机验证码登录
+// @Tags 用户信息
+// @accept mpfd,x-www-form-urlencoded
+// @Produce  json
+// @Param type formData int true "登录类型1:用户名密码登录，2手机号验证码登录"
+// @Param username formData string false "用户真实姓名"
+// @Param password formData string false "密码"
+// @Param phone formData string false "手机号"
+// @Param captcha formData string false "手机验证码"
+// @Success 200 {object} util.ApiResp
+// @Failure 302 {object} util.ApiResp
+// @Router /admin/login [post]
+func Login(ctx *gin.Context){
+	var userBaseInfo *business.UserBaseInfo
 	switch ctx.PostForm("type"){
 		case "1": //账号密码登录
-			user,err = u.ub.LoginByUsername(ctx.PostForm("username"),ctx.PostForm("password"))
+			userBaseInfo = business.LoginByUsername(ctx.PostForm("username"),ctx.PostForm("password"))
 			break
 		case "2": //手机号验证码登录
-			user,err = u.ub.LoginByPhone(ctx.PostForm("phone"),ctx.PostForm("captcha"))
+			userBaseInfo = business.LoginByPhone(ctx.PostForm("phone"),ctx.PostForm("captcha"))
 			break
 		default:
+			ctx.JSON(util.NewApiResp("LOGIN_METHOD_NOT_ALLOWD"))
+			return
 			break 
 	}
-	if err != nil{
-		ctx.JSON(302,gin.H{"status":false,"response_code":1000,"msg":"登录失败","data":nil})
+	if userBaseInfo == nil{
+		ctx.JSON(util.NewApiResp("UNAME_OR_PWD_ERROR"))
 		return
 	}
-	ctx.JSON(200,gin.H{"status":true,"response_code":200,"msg":"success","data":user})
-}
-
-func(u *User)List(ctx *gin.Context){
-	fmt.Fprintln(ctx.Writer,"hhh")
+	ctx.JSON(util.NewApiResp("SUCCESS",userBaseInfo))
 }

@@ -1,0 +1,59 @@
+definitions:
+  util.ApiResp:
+    properties:
+      code:
+        type: integer
+      data:
+        type: object
+      msg:
+        type: string
+      status:
+        type: boolean
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /admin/login:
+    post:
+      consumes:
+      - multipart/form-data
+      - application/x-www-form-urlencoded
+      description: 统一登录接口，暂时接收账号密码登录和手机验证码登录
+      parameters:
+      - description: 登录类型1:用户名密码登录，2手机号验证码登录
+        in: formData
+        name: type
+        required: true
+        type: integer
+      - description: 用户真实姓名
+        in: formData
+        name: username
+        type: string
+      - description: 密码
+        in: formData
+        name: password
+        type: string
+      - description: 手机号
+        in: formData
+        name: phone
+        type: string
+      - description: 手机验证码
+        in: formData
+        name: captcha
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 登录
+      tags:
+      - 用户信息
+swagger: "2.0"

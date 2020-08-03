@@ -2,7 +2,6 @@ package util
 
 import(
 	"github.com/dgrijalva/jwt-go"
-	"fmt"
 )
 
 // 定义一个jwt对象
@@ -37,7 +36,7 @@ func (j *JWT) CreateToken(claims CustomClaims) (string, error) {
 
 
 // token解码
-func (j *JWT) ParserToken(tokenString string) (*CustomClaims, error) {
+func (j *JWT) ParserToken(tokenString string) (*CustomClaims, string) {
 	// https://gowalker.org/github.com/dgrijalva/jwt-go#ParseWithClaims
 	// 输入用户自定义的Claims结构体对象,token,以及自定义函数来解析token字符串为jwt的Token结构体指针
 	// Keyfunc是匿名函数类型: type Keyfunc func(*Token) (interface{}, error)
@@ -50,27 +49,17 @@ func (j *JWT) ParserToken(tokenString string) (*CustomClaims, error) {
 		// https://gowalker.org/github.com/dgrijalva/jwt-go#ValidationError
 		// jwt.ValidationError 是一个无效token的错误结构
 		if ve, ok := err.(*jwt.ValidationError); ok {
-			// ValidationErrorMalformed是一个uint常量，表示token不可用
-			if ve.Errors&jwt.ValidationErrorMalformed != 0 {
-				return nil, fmt.Errorf("token不可用")
-				// ValidationErrorExpired表示Token过期
-			} else if ve.Errors&jwt.ValidationErrorExpired != 0 {
-				return nil, fmt.Errorf("token过期")
-				// ValidationErrorNotValidYet表示无效token
-			} else if ve.Errors&jwt.ValidationErrorNotValidYet != 0 {
-				return nil, fmt.Errorf("无效的token")
+			if ve.Errors&jwt.ValidationErrorExpired != 0 {
+				return nil, "AUTHORIZATION_TOKEN_EXPIRED"
 			} else {
-				return nil, fmt.Errorf("token不可用")
+				return nil, "AUTHORIZATION_TOKEN_ERROR"
 			}
-
 		}
 	}
 
 	// 将token中的claims信息解析出来并断言成用户自定义的有效载荷结构
 	if claims, ok := token.Claims.(*CustomClaims); ok && token.Valid {
-		return claims, nil
+		return claims, ""
 	}
-
-	return nil, fmt.Errorf("token无效")
-
+	return nil, "AUTHORIZATION_TOKEN_EXPIRED"
 }
