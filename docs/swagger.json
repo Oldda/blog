@@ -67,6 +67,91 @@
                     }
                 }
             }
+        },
+        "/api/captcha": {
+            "get": {
+                "description": "获取图形验证码图片",
+                "consumes": [
+                    "multipart/form-data",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "公共接口"
+                ],
+                "summary": "图形验证码",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "手机号",
+                        "name": "phone",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sms": {
+            "post": {
+                "description": "发送短信接口",
+                "consumes": [
+                    "multipart/form-data",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "公共接口"
+                ],
+                "summary": "短信接口",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "手机号",
+                        "name": "phone",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "图形验证码的值",
+                        "name": "captcha",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {

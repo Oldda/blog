@@ -14,7 +14,7 @@ func NewApiResp(codeStr string,data... interface{})(int,ApiResp){
 		code,_ := result["http_code"].(int)
 		body,_ := result["api_body"].(ApiResp)
 		if data != nil{
-			body.Data = data
+			body.Data = data[0] //仅允许一个或者0个data
 		}
 		return code,body
 	}
@@ -47,6 +47,22 @@ var	res = map[string]resp{
 			Status:false,
 			Code:1001,
 			Msg:"缺少必要参数",
+		},
+	},
+	"CAPTCHA_ERR_OR_EXPIRED" : resp{
+		"http_code" : 302,
+		"api_body" : ApiResp{
+			Status:false,
+			Code:1002,
+			Msg:"验证码错误或已失效",
+		},
+	},
+	"SMS_SEND_ERROR" : resp{
+		"http_code" : 302,
+		"api_body" : ApiResp{
+			Status:false,
+			Code:1003,
+			Msg:"短信发送失败",
 		},
 	},
 	//用户相关

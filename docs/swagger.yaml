@@ -56,4 +56,61 @@ paths:
       summary: 登录
       tags:
       - 用户信息
+  /api/captcha:
+    get:
+      consumes:
+      - multipart/form-data
+      - application/x-www-form-urlencoded
+      description: 获取图形验证码图片
+      parameters:
+      - description: 手机号
+        in: query
+        name: phone
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 图形验证码
+      tags:
+      - 公共接口
+  /api/sms:
+    post:
+      consumes:
+      - multipart/form-data
+      - application/x-www-form-urlencoded
+      description: 发送短信接口
+      parameters:
+      - description: 手机号
+        in: formData
+        name: phone
+        required: true
+        type: string
+      - description: 图形验证码的值
+        in: formData
+        name: captcha
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 短信接口
+      tags:
+      - 公共接口
 swagger: "2.0"

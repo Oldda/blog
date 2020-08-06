@@ -34,9 +34,27 @@ func LoginByUsername(username,password string)*UserBaseInfo{
 }
 
 func LoginByPhone(phone,captcha string)*UserBaseInfo{
+	var err error
+	cpt,err := util.RdbGetString(phone+"_sms")
+	if err == nil && cpt == captcha{
+		user := new(model.User)
+		has,err := model.DB.Engine.Where("phone = ?",phone).Get(user)
+		if has && err == nil {
+			token,err := GenerateToken(user.Id)
+			if err == nil{
+				return &UserBaseInfo{
+					user.Nickname,
+					user.Avatar,
+					user.Id,
+					token,
+				} 
+			}
+		}
+	}
 	return nil
 }
 
+//生成token
 func GenerateToken(userid int)(string,error){
 	// 构造SignKey: 签名和解签名需要使用一个值
 	j := util.NewJWT()
@@ -45,7 +63,7 @@ func GenerateToken(userid int)(string,error){
 		userid,
 		jwtgo.StandardClaims{
 			NotBefore: int64(time.Now().Unix() - 1000), // 签名生效时间
-			ExpiresAt: int64(time.Now().Unix() + 3600), // 签名过期时间
+			ExpiresAt: int64(time.Now().Unix() + 3600), // 签名过期时间1个小时
 			Issuer:    "oldda.cn",                    // 签名颁发者
 		},
 	}

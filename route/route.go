@@ -12,6 +12,8 @@ func API(svr *gin.Engine){
 	{
 		//后台管理
 		api.POST("/admin/login",ctrls.Login) //登录
+		api.POST("/sms",ctrls.SendSMS)//发送短信
+		api.GET("/captcha",ctrls.GetCaptcha) //图形验证码
 		bak := api.Group("/admin",middlewares.JWTAuth())
 		{
 			bak.GET("/index",ctrls.AdminIndex)//首页
