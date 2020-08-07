@@ -19,7 +19,7 @@ import(
 // @Param captcha formData string true "图形验证码的值"
 // @Success 200 {object} util.ApiResp
 // @Failure 302 {object} util.ApiResp
-// @Router /api/sms [post]
+// @Router /sms [post]
 func SendSMS(ctx *gin.Context){
 	phone := ctx.PostForm("phone")
 	captcha := ctx.PostForm("captcha")
@@ -50,7 +50,7 @@ func SendSMS(ctx *gin.Context){
 // @Param phone query string true "手机号"
 // @Success 200 {object} util.ApiResp
 // @Failure 302 {object} util.ApiResp
-// @Router /api/captcha [get]
+// @Router /captcha [get]
 func GetCaptcha(ctx *gin.Context){
 	phone := ctx.Query("phone")
 	if phone == ""{
