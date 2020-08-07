@@ -15,6 +15,7 @@ type UserBaseInfo struct{
 	Authorization string `json:"Authorization"`
 }
 
+//用户名密码登录
 func LoginByUsername(username,password string)*UserBaseInfo{
 	user := new(model.User)
 	has,err := model.DB.Engine.Where("realname=? and password=?",username,password).Get(user)
@@ -33,6 +34,7 @@ func LoginByUsername(username,password string)*UserBaseInfo{
 	return nil
 }
 
+//手机号验证码登录
 func LoginByPhone(phone,captcha string)*UserBaseInfo{
 	var err error
 	cpt,err := util.RdbGetString(phone+"_sms")
