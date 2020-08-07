@@ -18,7 +18,7 @@ func main(){
     docs.SwaggerInfo.Title = "个人博客系统API"
     docs.SwaggerInfo.Description = "仅供个人学习使用，不做任何商业活动。"
     docs.SwaggerInfo.Version = "1.0.0"
-    docs.SwaggerInfo.Host = "oldda.cn"
+    docs.SwaggerInfo.Host = "blog.oldda.cn"
     docs.SwaggerInfo.BasePath = "/api"
     docs.SwaggerInfo.Schemes = []string{"http", "https"}
 

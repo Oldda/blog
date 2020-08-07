@@ -9,6 +9,11 @@ func JWTAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 通过http header中的token解析来认证
 		token := c.Request.Header.Get("Authorization")
+		if token == ""{
+			c.JSON(util.NewApiResp("MUST_PARAMS_LOST"))
+			c.Abort()
+			return
+		}
 		token = string([]byte(token)[len("Bearer "):])
 		if token == "" {
 			c.JSON(util.NewApiResp("AUTHORIZATION_TOKEN_LOST"))
