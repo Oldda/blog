@@ -5,6 +5,180 @@
         "license": {}
     },
     "paths": {
+        "/admin/category": {
+            "get": {
+                "description": "分类列表，无分页，递归实现。",
+                "consumes": [
+                    "multipart/form-data",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "分类管理"
+                ],
+                "summary": "分类列表",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "编辑分类",
+                "consumes": [
+                    "multipart/form-data",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "分类管理"
+                ],
+                "summary": "分类更新",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "分类id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "父级id",
+                        "name": "pid",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "排序，数值越大越靠前",
+                        "name": "order",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "分类名称",
+                        "name": "title",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "新增分类",
+                "consumes": [
+                    "multipart/form-data",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "分类管理"
+                ],
+                "summary": "分类新增",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "父级id",
+                        "name": "pid",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "排序，数值越大越靠前",
+                        "name": "order",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "分类名称",
+                        "name": "title",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "删除分类 暂仅支持单个删除",
+                "consumes": [
+                    "multipart/form-data",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "分类管理"
+                ],
+                "summary": "分类删除",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "分类id",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            }
+        },
         "/admin/login": {
             "post": {
                 "description": "统一登录接口，暂时接收账号密码登录和手机验证码登录",
@@ -68,7 +242,7 @@
                 }
             }
         },
-        "/api/captcha": {
+        "/captcha": {
             "get": {
                 "description": "获取图形验证码图片",
                 "consumes": [
@@ -107,7 +281,7 @@
                 }
             }
         },
-        "/api/sms": {
+        "/sms": {
             "post": {
                 "description": "发送短信接口",
                 "consumes": [

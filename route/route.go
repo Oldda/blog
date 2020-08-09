@@ -19,10 +19,10 @@ func API(svr *gin.Engine){
 			bak.GET("/index",ctrls.AdminIndex)//首页
 
 			//分类管理
-			bak.GET("/category/list",ctrls.CategoryList)
-			bak.GET("/category/store",ctrls.CategoryList)
-			bak.GET("/category/update",ctrls.CategoryList)
-			bak.GET("/category/delete",ctrls.CategoryList)
+			bak.GET("/category",ctrls.CategoryList)
+			bak.POST("/category",ctrls.CategoryStore)
+			bak.PUT("/category",ctrls.CategoryUpdate)
+			bak.DELETE("/category",ctrls.CategoryDelete)
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package model
 
 import(
+	"time"
 	"blog/util"
 	"github.com/go-xorm/xorm"
 	"log"
@@ -14,7 +15,8 @@ func InitDB(){
 	var err error
 	DB,err = util.NewDB("127.0.0.1","3308","root","Aa890223","blog","utf8")
 	if err != nil{
-		log.Fatal(err)
+		log.Println(err)
 	}
 	engine = DB.Engine
+	engine.TZLocation, _ = time.LoadLocation("Asia/Shanghai")
 }

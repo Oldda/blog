@@ -5,6 +5,7 @@ import(
     "math/rand"
 )
 
+//生成随机字符串
 func GetRandStr(n int) (randStr string) {
     chars := "ABCDEFGHIJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789"
     charsLen := len(chars)

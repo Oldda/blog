@@ -65,6 +65,46 @@ var	res = map[string]resp{
 			Msg:"短信发送失败",
 		},
 	},
+	"ADD_RESOURCE_ERR" : resp{
+		"http_code" : 302,
+		"api_body" : ApiResp{
+			Status:false,
+			Code:1004,
+			Msg:"新增资源失败",
+		},
+	},
+	"UPDATE_RESOURCE_ERR" : resp{
+		"http_code" : 302,
+		"api_body" : ApiResp{
+			Status:false,
+			Code:1005,
+			Msg:"更新资源失败",
+		},
+	},
+	"DELETE_RESOURCE_ERR" : resp{
+		"http_code" : 302,
+		"api_body" : ApiResp{
+			Status:false,
+			Code:1006,
+			Msg:"删除资源失败",
+		},
+	},
+	"QUERY_RESOURCE_ERR" : resp{
+		"http_code" : 302,
+		"api_body" : ApiResp{
+			Status:false,
+			Code:1007,
+			Msg:"查询资源失败",
+		},
+	},
+	"PARAMS_VALIDATE_ERR" : resp{
+		"http_code" : 302,
+		"api_body" : ApiResp{
+			Status:false,
+			Code:1008,
+			Msg:"参数验证错误",
+		},
+	},
 	//用户相关
 	"LOGIN_METHOD_NOT_ALLOWD" : resp{
 		"http_code" : 302,

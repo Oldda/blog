@@ -16,10 +16,11 @@ create table users (
   created_at int(10) unsigned not null DEFAULT 0,
   updated_at int(10) unsigned not null DEFAULT 0,
   deleted_at int(10) unsigned not null DEFAULT 0
-)ENGINE=innodb DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+)ENGINE=innodb DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT="管理员表";
 
 create table articles (
   id         int(10) unsigned not null auto_increment primary key,
+  cid        int(10) unsigned not null DEFAULT 0 comment "分类ID",
   title      varchar(255) not null DEFAULT "",
   description varchar(1000) not null DEFAULT "",
   body       text,
@@ -27,7 +28,7 @@ create table articles (
   created_at int(10) unsigned not null DEFAULT 0,
   updated_at int(10) unsigned not null DEFAULT 0,
   deleted_at int(10) unsigned not null DEFAULT 0 
-)ENGINE=innodb DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+)ENGINE=innodb DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT="文章表";
 
 create table category (
   id         int(10) unsigned not null auto_increment primary key,
@@ -38,7 +39,7 @@ create table category (
   created_at int(10) unsigned not null DEFAULT 0,
   updated_at int(10) unsigned not null DEFAULT 0,
   deleted_at int(10) unsigned not null DEFAULT 0 
-)ENGINE=innodb DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+)ENGINE=innodb DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT="分类表";
 
 create table tag (
   id         int(10) unsigned not null auto_increment primary key,
@@ -48,7 +49,7 @@ create table tag (
   created_at int(10) unsigned not null DEFAULT 0,
   updated_at int(10) unsigned not null DEFAULT 0,
   deleted_at int(10) unsigned not null DEFAULT 0 
-)ENGINE=innodb DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+)ENGINE=innodb DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT="标签表";
 
 create table tag_and_article (
   id         int(10) unsigned not null auto_increment primary key,
@@ -57,4 +58,4 @@ create table tag_and_article (
   created_at int(10) unsigned not null DEFAULT 0,
   updated_at int(10) unsigned not null DEFAULT 0,
   deleted_at int(10) unsigned not null DEFAULT 0 
-)ENGINE=innodb DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+)ENGINE=innodb DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT="标签文章关系表";

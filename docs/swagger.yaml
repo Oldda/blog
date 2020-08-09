@@ -14,6 +14,124 @@ info:
   contact: {}
   license: {}
 paths:
+  /admin/category:
+    delete:
+      consumes:
+      - multipart/form-data
+      - application/x-www-form-urlencoded
+      description: 删除分类 暂仅支持单个删除
+      parameters:
+      - description: 分类id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 分类删除
+      tags:
+      - 分类管理
+    get:
+      consumes:
+      - multipart/form-data
+      - application/x-www-form-urlencoded
+      description: 分类列表，无分页，递归实现。
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 分类列表
+      tags:
+      - 分类管理
+    post:
+      consumes:
+      - multipart/form-data
+      - application/x-www-form-urlencoded
+      description: 新增分类
+      parameters:
+      - description: 父级id
+        in: formData
+        name: pid
+        required: true
+        type: integer
+      - description: 排序，数值越大越靠前
+        in: formData
+        name: order
+        type: integer
+      - description: 分类名称
+        in: formData
+        name: title
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 分类新增
+      tags:
+      - 分类管理
+    put:
+      consumes:
+      - multipart/form-data
+      - application/x-www-form-urlencoded
+      description: 编辑分类
+      parameters:
+      - description: 分类id
+        in: query
+        name: id
+        required: true
+        type: integer
+      - description: 父级id
+        in: formData
+        name: pid
+        required: true
+        type: integer
+      - description: 排序，数值越大越靠前
+        in: formData
+        name: order
+        type: integer
+      - description: 分类名称
+        in: formData
+        name: title
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 分类更新
+      tags:
+      - 分类管理
   /admin/login:
     post:
       consumes:
@@ -56,7 +174,7 @@ paths:
       summary: 登录
       tags:
       - 用户信息
-  /api/captcha:
+  /captcha:
     get:
       consumes:
       - multipart/form-data
@@ -82,7 +200,7 @@ paths:
       summary: 图形验证码
       tags:
       - 公共接口
-  /api/sms:
+  /sms:
     post:
       consumes:
       - multipart/form-data
