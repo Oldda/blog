@@ -17,9 +17,6 @@ type Category struct{
 	Children []*Category
 }
 
-var cates = make([]*Category,0)
-var pid = 0
-
 func (cate *Category)CreateCategory(pid,order int, title string)(int,string){
 	cate.Order = order
 	cate.Title = title

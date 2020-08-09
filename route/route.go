@@ -23,6 +23,14 @@ func API(svr *gin.Engine){
 			bak.POST("/category",ctrls.CategoryStore)
 			bak.PUT("/category",ctrls.CategoryUpdate)
 			bak.DELETE("/category",ctrls.CategoryDelete)
+
+			//标签管理
+			bak.GET("/tag",ctrls.TagList)
+			bak.POST("/tag",ctrls.TagStore)
+			bak.PUT("/tag",ctrls.TagUpdate)
+			bak.DELETE("/tag",ctrls.TagDelete)
+
+			//管理员管理
 		}
 	}
 }

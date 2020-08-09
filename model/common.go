@@ -20,3 +20,8 @@ func InitDB(){
 	engine = DB.Engine
 	engine.TZLocation, _ = time.LoadLocation("Asia/Shanghai")
 }
+
+type ListData struct{
+	List interface{} `json:"list"`
+	Total int64 `json:"count"`
+}
