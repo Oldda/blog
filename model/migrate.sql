@@ -7,8 +7,8 @@ drop table if exists tag_and_article;
 
 create table users (
   id         int(10) unsigned not null auto_increment primary key,
-  nickname   varchar(32) not null unique,
-  realname   varchar(255) not null unique,
+  nickname   varchar(32) not null,
+  realname   varchar(255) not null,
   avatar     varchar(255) not null DEFAULT "",
   email      varchar(255) not null unique,
   password   varchar(255) not null,

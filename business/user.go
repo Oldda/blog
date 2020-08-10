@@ -18,7 +18,7 @@ type UserBaseInfo struct{
 //用户名密码登录
 func LoginByUsername(username,password string)*UserBaseInfo{
 	user := new(model.User)
-	has,err := model.DB.Engine.Where("realname=? and password=?",username,password).Get(user)
+	has,err := model.DB.Engine.Where("email=? and password=?",username,password).Get(user)
 	if has {
 		token,err := GenerateToken(user.Id)
 		if err == nil{
@@ -64,12 +64,39 @@ func GenerateToken(userid int)(string,error){
 	claims := util.CustomClaims{
 		userid,
 		jwtgo.StandardClaims{
-			NotBefore: int64(time.Now().Unix() - 1000), // 签名生效时间
-			ExpiresAt: int64(time.Now().Unix() + 3600), // 签名过期时间1个小时
+			NotBefore: int64(time.Now().Unix() - 1), // 签名生效时间
+			ExpiresAt: int64(time.Now().Unix() + 7200), // 签名过期时间2个小时
 			Issuer:    "oldda.cn",                    // 签名颁发者
 		},
 	}
 
 	// 根据claims生成token对象
 	return j.CreateToken(claims)
+}
+
+//添加管理员
+func CreateUser(nickname,realname,password,phone,email,avatar string)(int,string){
+	user := new(model.User)
+	return user.CreateUser(nickname,realname,password,phone,email,avatar)
+}
+
+//管理员列表
+func UserList(page,limit int)model.ListData{
+	user := new(model.User)
+	return user.UserList(page,limit)
+}
+
+func UserUpdate(id int,nickname,realname,password,phone,email,avatar string)error{
+	user := new(model.User)
+	return user.UserUpdate(id,nickname,realname,password,phone,email,avatar)
+}
+
+func UserDelete(id int)error{
+	user := new(model.User)
+	return user.UserDelete(id)
+}
+
+func UserGet(id int)(*model.User,error){
+	user := new(model.User)
+	return user.UserGet(id)
 }

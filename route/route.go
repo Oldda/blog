@@ -2,8 +2,12 @@ package route
 
 import(
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
+	"github.com/go-playground/validator/v10"
+
 	"blog/ctrls"
 	"blog/middlewares"
+	vd "blog/validators"
 )
 
 //路由分发
@@ -31,6 +35,20 @@ func API(svr *gin.Engine){
 			bak.DELETE("/tag",ctrls.TagDelete)
 
 			//管理员管理
+			bak.GET("/user",ctrls.UserList)
+			bak.POST("/user",ctrls.UserStore)
+			bak.PUT("/user",ctrls.UserUpdate)
+			bak.DELETE("/user",ctrls.UserDelete)
+			bak.GET("/user/:id",ctrls.UserGet)
+
+			//素材管理
+			bak.GET("/matieral/token",ctrls.MatieralGetToken)
 		}
+	}
+
+	//注册自定义验证器--gin默认的v8验证器有错误，报没有实例化validator的错误。
+	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
+        v.RegisterValidation("validemail", vd.Validemail)
+        v.RegisterValidation("validphone", vd.Validphone)
 	}
 }
