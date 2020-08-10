@@ -11,7 +11,6 @@ import(
 type UserBaseInfo struct{
 	Nickname string `json:"nickname"`
 	Avatar string `json:"avatar"`
-	Userid int `json:"userid"`
 	Authorization string `json:"Authorization"`
 }
 
@@ -25,7 +24,6 @@ func LoginByUsername(username,password string)*UserBaseInfo{
 			return &UserBaseInfo{
 				user.Nickname,
 				user.Avatar,
-				user.Id,
 				token,
 			}
 		}
@@ -47,7 +45,6 @@ func LoginByPhone(phone,captcha string)*UserBaseInfo{
 				return &UserBaseInfo{
 					user.Nickname,
 					user.Avatar,
-					user.Id,
 					token,
 				} 
 			}
