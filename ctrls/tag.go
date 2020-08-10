@@ -57,7 +57,7 @@ func TagStore(ctx *gin.Context){
 
 // @Summary 分类更新
 // @Description 编辑分类
-// @Tags 分类管理
+// @Tags 标签管理
 // @accept mpfd,x-www-form-urlencoded
 // @Produce  json
 // @Param id query int true "分类id"
@@ -83,7 +83,7 @@ func TagUpdate(ctx *gin.Context){
 
 // @Summary 标签删除
 // @Description 删除标签 暂仅支持单个删除
-// @Tags 分类管理
+// @Tags 标签管理
 // @accept mpfd,x-www-form-urlencoded
 // @Produce  json
 // @Param id query int true "标签id"

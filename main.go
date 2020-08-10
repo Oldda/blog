@@ -38,5 +38,5 @@ func main(){
 	ctx := context.Background()
 	util.NewRedisEngine("39.106.116.186:6379","Aa890223",8,ctx)
 
-	svr.Run("127.0.0.1:8080")
+	svr.Run(":8080")
 }
