@@ -12,7 +12,7 @@ import(
 
 //路由分发
 func API(svr *gin.Engine){
-	api := svr.Group("/api")
+	api := svr.Group("/api",middlewares.Cors())
 	{
 		//后台管理
 		api.POST("/admin/login",ctrls.Login) //登录
@@ -43,6 +43,8 @@ func API(svr *gin.Engine){
 
 			//素材管理
 			bak.GET("/matieral/token",ctrls.MatieralGetToken)
+
+			//文章管理
 		}
 	}
 
