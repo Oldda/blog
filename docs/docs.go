@@ -351,7 +351,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "分类管理"
+                    "标签管理"
                 ],
                 "summary": "分类更新",
                 "parameters": [
@@ -451,7 +451,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "分类管理"
+                    "标签管理"
                 ],
                 "summary": "标签删除",
                 "parameters": [

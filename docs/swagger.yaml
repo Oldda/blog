@@ -226,7 +226,7 @@ paths:
             $ref: '#/definitions/util.ApiResp'
       summary: 标签删除
       tags:
-      - 分类管理
+      - 标签管理
     get:
       consumes:
       - multipart/form-data
@@ -326,7 +326,7 @@ paths:
             $ref: '#/definitions/util.ApiResp'
       summary: 分类更新
       tags:
-      - 分类管理
+      - 标签管理
   /admin/user:
     delete:
       consumes:
