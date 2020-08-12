@@ -7,12 +7,12 @@ drop table if exists tag_and_article;
 
 create table users (
   id         int(10) unsigned not null auto_increment primary key,
-  nickname   varchar(32) not null,
-  realname   varchar(255) not null,
-  avatar     varchar(255) not null DEFAULT "",
-  email      varchar(255) not null unique,
-  password   varchar(255) not null,
-  phone      char(11) not null unique,
+  nickname   varchar(32) not null DEFAULT "" comment "昵称",
+  realname   varchar(255) not null DEFAULT "" comment "真实姓名",
+  avatar     varchar(255) not null DEFAULT "" comment "头像",
+  email      varchar(255) not null unique comment "邮箱-用于登录",
+  password   varchar(255) not null comment "密码",
+  phone      char(11) not null unique comment "手机号",
   created_at int(10) unsigned not null DEFAULT 0,
   updated_at int(10) unsigned not null DEFAULT 0,
   deleted_at int(10) unsigned not null DEFAULT 0
@@ -23,7 +23,7 @@ create table articles (
   cid        int(10) unsigned not null DEFAULT 0 comment "分类ID",
   title      varchar(255) not null DEFAULT "",
   description varchar(1000) not null DEFAULT "",
-  body       text,
+  body       text not null,
   user_id    int(10) unsigned not null DEFAULT 0,
   created_at int(10) unsigned not null DEFAULT 0,
   updated_at int(10) unsigned not null DEFAULT 0,

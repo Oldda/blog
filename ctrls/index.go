@@ -8,6 +8,15 @@ import(
 	// "blog/util"
 )
 
+
+/**
+swagger的请求类型
+formData
+query
+path
+header
+body
+**/
 func AdminIndex(ctx *gin.Context){
 	ctx.String(200,"xxx")
 }

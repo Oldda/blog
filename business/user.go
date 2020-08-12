@@ -83,16 +83,19 @@ func UserList(page,limit int)model.ListData{
 	return user.UserList(page,limit)
 }
 
+//管理员更新
 func UserUpdate(id int,nickname,realname,password,phone,email,avatar string)error{
 	user := new(model.User)
 	return user.UserUpdate(id,nickname,realname,password,phone,email,avatar)
 }
 
+//管理员删除
 func UserDelete(id int)error{
 	user := new(model.User)
 	return user.UserDelete(id)
 }
 
+//获取单个管理员
 func UserGet(id int)(*model.User,error){
 	user := new(model.User)
 	return user.UserGet(id)

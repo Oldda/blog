@@ -9,7 +9,7 @@ import(
 )
 
 // @Summary 获取上传token
-// @Description 上传图片获取七牛上传token
+// @Description 上传图片获取七牛上传token-暂时仅支持上传，后期改为素材管理
 // @Tags 素材管理
 // @accept mpfd,x-www-form-urlencoded
 // @Produce  json

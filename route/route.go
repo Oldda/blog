@@ -45,6 +45,7 @@ func API(svr *gin.Engine){
 			bak.GET("/matieral/token",ctrls.MatieralGetToken)
 
 			//文章管理
+			bak.POST("/article",ctrls.CreateArticle)
 		}
 	}
 
