@@ -6,7 +6,7 @@ import(
 )
 
 type Category struct{
-	Id int `xorm:"id pk autoincr" json:"id"` //因此添加数据的时候返回了自增id
+	Id int `xorm:"pk autoincr" json:"id"` //因此添加数据的时候返回了自增id
 	Pid int `xorm:"pid" json:"pid"`
 	Order int `xorm:"order" json:"order"`
 	Title string `xorm:"title" json:"title"`
@@ -14,7 +14,11 @@ type Category struct{
 	CreatedAt int64 `xorm:"created" json:"created_at"`
 	UpdatedAt int64 `xorm:"updated" json:"updated_at"`
 	DeletedAt int64 `json:"-"`
-	Children []*Category
+	Children []*Category `xorm:"-" json:"children"`
+}
+
+func(cate *Category)TableName()string{
+	return "category"
 }
 
 func (cate *Category)CreateCategory(pid,order int, title string)(int,string){
@@ -52,4 +56,15 @@ func(cate *Category)DeleteCategory(id int)error{
 	log.Println(id)
 	_,err := engine.Id(id).Update(cate)
 	return err
+}
+
+func(cate *Category)GetCateById(id int)(*Category,error){
+	log.Println("category is here running")
+	has, err := engine.Id(id).Get(cate)
+	log.Println(has)
+	log.Println(err)
+	if err != nil{
+		return nil,err
+	}
+	return cate,nil
 }

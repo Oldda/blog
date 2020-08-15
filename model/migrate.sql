@@ -59,3 +59,5 @@ create table tag_and_article (
   updated_at int(10) unsigned not null DEFAULT 0,
   deleted_at int(10) unsigned not null DEFAULT 0 
 )ENGINE=innodb DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT="标签文章关系表";
+
+insert into users (phone,email,password)values("17710818223","17710818223@163.com","e10adc3949ba59abbe56e057f20f883e");

@@ -46,6 +46,12 @@ func API(svr *gin.Engine){
 
 			//文章管理
 			bak.POST("/article",ctrls.CreateArticle)
+			bak.GET("/article/:id",ctrls.GetArticleById)
+			bak.PUT("/article",ctrls.UpdateArticle)
+			bak.GET("/article",ctrls.ArticleList)
+			bak.DELETE("/article",ctrls.DeleteArticle)
+			bak.PUT("article_order/:id",ctrls.OrderArticle)
+			bak.PUT("article_tag/:id",ctrls.TagSetArticle)
 		}
 	}
 
