@@ -21,6 +21,197 @@ info:
   contact: {}
   license: {}
 paths:
+  /admin/article:
+    delete:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 删除文章。和分类的关系是一个分类对应多个文章，和标签的关系是多对多。
+      parameters:
+      - description: 文章id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 文章删除
+      tags:
+      - 文章管理
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 文章列表。和分类的关系是一个分类对应多个文章，和标签的关系是多对多。
+      parameters:
+      - description: 页码
+        in: path
+        name: page
+        type: integer
+      - description: 每页显示条数
+        in: path
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 文章列表
+      tags:
+      - 文章管理
+    post:
+      consumes:
+      - application/json
+      description: 编辑文章和分类的关系是一个分类对应多个文章，和标签的关系是多对多。注：请求格式为json
+      parameters:
+      - description: 文章id
+        in: body
+        name: id
+        required: true
+        schema:
+          type: integer
+      - description: 分类id
+        in: body
+        name: cid
+        required: true
+        schema:
+          type: integer
+      - description: 标签id
+        in: body
+        name: tag_id
+        schema:
+          type: integer
+      - description: 标题
+        in: body
+        name: title
+        required: true
+        schema:
+          type: string
+      - description: 描述
+        in: body
+        name: description
+        required: true
+        schema:
+          type: string
+      - description: 内容
+        in: body
+        name: body
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 文章更新
+      tags:
+      - 文章管理
+  /admin/article/:id:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 获取文章详情。和分类的关系是一个分类对应多个文章，和标签的关系是多对多。
+      parameters:
+      - description: 文章id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 文章详情
+      tags:
+      - 文章管理
+  /admin/article_order/:id:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 修改文章排序。和分类的关系是一个分类对应多个文章，和标签的关系是多对多。注：请求格式为json
+      parameters:
+      - description: 文章id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 顺序，数值越大越靠前
+        in: formData
+        name: order
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 文章排序
+      tags:
+      - 文章管理
+  /admin/article_tag/:id:
+    put:
+      consumes:
+      - application/json
+      description: 给文章设置标签，请设置请求格式为json
+      parameters:
+      - description: 文章id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 标签id列表
+        in: body
+        name: tag_id
+        required: true
+        schema:
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+        "302":
+          description: Found
+          schema:
+            $ref: '#/definitions/util.ApiResp'
+      summary: 文章标签
+      tags:
+      - 文章管理
   /admin/category:
     delete:
       consumes:
@@ -186,7 +377,7 @@ paths:
       consumes:
       - multipart/form-data
       - application/x-www-form-urlencoded
-      description: 上传图片获取七牛上传token
+      description: 上传图片获取七牛上传token-暂时仅支持上传，后期改为素材管理
       produces:
       - application/json
       responses:

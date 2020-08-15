@@ -25,6 +25,296 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/admin/article": {
+            "get": {
+                "description": "文章列表。和分类的关系是一个分类对应多个文章，和标签的关系是多对多。",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章管理"
+                ],
+                "summary": "文章列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "页码",
+                        "name": "page",
+                        "in": "path"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "每页显示条数",
+                        "name": "limit",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "编辑文章和分类的关系是一个分类对应多个文章，和标签的关系是多对多。注：请求格式为json",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章管理"
+                ],
+                "summary": "文章更新",
+                "parameters": [
+                    {
+                        "description": "文章id",
+                        "name": "id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "分类id",
+                        "name": "cid",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "标签id",
+                        "name": "tag_id",
+                        "in": "body",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "标题",
+                        "name": "title",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "描述",
+                        "name": "description",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "内容",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "删除文章。和分类的关系是一个分类对应多个文章，和标签的关系是多对多。",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章管理"
+                ],
+                "summary": "文章删除",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "文章id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/article/:id": {
+            "get": {
+                "description": "获取文章详情。和分类的关系是一个分类对应多个文章，和标签的关系是多对多。",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章管理"
+                ],
+                "summary": "文章详情",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "文章id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/article_order/:id": {
+            "get": {
+                "description": "修改文章排序。和分类的关系是一个分类对应多个文章，和标签的关系是多对多。注：请求格式为json",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章管理"
+                ],
+                "summary": "文章排序",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "文章id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "顺序，数值越大越靠前",
+                        "name": "order",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/article_tag/:id": {
+            "put": {
+                "description": "给文章设置标签，请设置请求格式为json",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章管理"
+                ],
+                "summary": "文章标签",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "文章id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "标签id列表",
+                        "name": "tag_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    },
+                    "302": {
+                        "description": "Found",
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiResp"
+                        }
+                    }
+                }
+            }
+        },
         "/admin/category": {
             "get": {
                 "description": "分类列表，无分页，递归实现。",
@@ -264,7 +554,7 @@ var doc = `{
         },
         "/admin/matieral/token": {
             "get": {
-                "description": "上传图片获取七牛上传token",
+                "description": "上传图片获取七牛上传token-暂时仅支持上传，后期改为素材管理",
                 "consumes": [
                     "multipart/form-data",
                     "application/x-www-form-urlencoded"
