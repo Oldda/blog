@@ -226,7 +226,7 @@ var doc = `{
         },
         "/admin/article_order/:id": {
             "get": {
-                "description": "修改文章排序。和分类的关系是一个分类对应多个文章，和标签的关系是多对多。注：请求格式为json",
+                "description": "修改文章排序。",
                 "consumes": [
                     "application/x-www-form-urlencoded"
                 ],

@@ -16,7 +16,7 @@ import(
 func main(){
 	// programatically set swagger info
     docs.SwaggerInfo.Title = "个人博客系统API"
-    docs.SwaggerInfo.Description = "仅供个人学习使用，不做任何商业活动。"
+    docs.SwaggerInfo.Description = "仅供个人学习使用，不做任何商业活动。为了练习不同的请求方式，请注意文档中注明的请求格式"
     docs.SwaggerInfo.Version = "1.0.0"
     docs.SwaggerInfo.Host = "blog.oldda.cn"
     docs.SwaggerInfo.BasePath = "/api"

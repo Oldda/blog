@@ -147,7 +147,7 @@ func DeleteArticle(ctx *gin.Context){
 }
 
 // @Summary 文章排序
-// @Description 修改文章排序。和分类的关系是一个分类对应多个文章，和标签的关系是多对多。注：请求格式为json
+// @Description 修改文章排序。
 // @Tags 文章管理
 // @accept x-www-form-urlencoded
 // @Produce  json
