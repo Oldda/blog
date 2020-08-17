@@ -270,7 +270,7 @@ var doc = `{
         },
         "/admin/article_tag/:id": {
             "put": {
-                "description": "给文章设置标签，请设置请求格式为json",
+                "description": "给文章快速设置标签，请设置请求格式为json",
                 "consumes": [
                     "application/json"
                 ],

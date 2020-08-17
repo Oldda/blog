@@ -185,7 +185,7 @@ paths:
     put:
       consumes:
       - application/json
-      description: 给文章设置标签，请设置请求格式为json
+      description: 给文章快速设置标签，请设置请求格式为json
       parameters:
       - description: 文章id
         in: path
