@@ -9,6 +9,7 @@ import(
 
 type Article struct{
 	Id int `xorm:"id pk autoincr" json:"id"`
+    Order int `xorm:"order" json:"order"`
 	Cid int `xorm:"cid" json:"cate_id"`
 	UserId int `xorm:"user_id" json:"user_id"`
 	Title string `xorm:"title" json:"title"`
@@ -39,6 +40,7 @@ func (article *Article)CreateArticle(art validators.CreateArticleValidator)(int,
         return 0,"ADD_RESOURCE_ERR"
     }
     //存储文章
+    article.Order = art.Order
     article.Cid = art.Cid
     article.UserId = art.UserId
     article.Title = art.Title
@@ -92,6 +94,7 @@ func(article *Article)UpdateArticle(art validators.UpdateArticleValidator)bool{
     if err == nil{
         //更改文章本身
         article.Cid = art.Cid
+        article.Order = art.Order
         article.UserId = art.UserId
         article.Title = art.Title
         article.Description = art.Description
@@ -142,5 +145,13 @@ func(article *Article)DeleteArticle(id int)bool{
     if err != nil{
         return false
     } 
+    return true
+}
+
+func (article *Article) OrderArticle(id,order int)bool{
+    article.Order = order
+    if _,err := engine.Id(id).Update(article);err != nil{
+        return false
+    }
     return true
 }

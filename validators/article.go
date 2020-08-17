@@ -2,6 +2,7 @@ package validators
 
 type CreateArticleValidator struct{
 	Cid int `json:"cid" binding:"required"`
+	Order int `json:"order" binding:"min=0"`
 	TagId []int `json:"tag_id"`
 	UserId int
 	Title string `json:"title" binding:"required"`
@@ -11,6 +12,7 @@ type CreateArticleValidator struct{
 
 type UpdateArticleValidator struct{
 	Id int `json:"id" binding:"required"`
+	Order int `json:"order" binding="min=0"`
 	Cid int `json:"cid" binding:"required"`
 	TagId []int `json:"tag_id"`
 	UserId int

@@ -17,6 +17,7 @@ import(
 // @accept json
 // @Produce  json
 // @Param cid body int true "分类id"
+// @Param order body int false "排序"
 // @Param tag_id body int false "标签id"
 // @Param title body string true "标题"
 // @Param description body string true "描述"
@@ -156,11 +157,22 @@ func DeleteArticle(ctx *gin.Context){
 // @Failure 302 {object} util.ApiResp
 // @Router /admin/article_order/:id [get]
 func OrderArticle(ctx *gin.Context){
-
+	id,_ := strconv.Atoi(ctx.Param("id"))
+	order,_ := strconv.Atoi(ctx.PostForm("order"))
+	if id == 0{
+		ctx.JSON(util.NewApiResp("MUST_PARAMS_LOST"))
+		return
+	}
+	if !business.OrderArticle(id,order) {
+		ctx.JSON(util.NewApiResp("UPDATE_RESOURCE_ERR"))
+		return
+	}
+	ctx.JSON(util.NewApiResp("SUCCESS"))
+	return
 }
 
 // @Summary 文章标签
-// @Description 给文章设置标签，请设置请求格式为json
+// @Description 给文章快速设置标签，请设置请求格式为json
 // @Tags 文章管理
 // @accept json
 // @Produce  json

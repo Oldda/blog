@@ -20,11 +20,12 @@ create table users (
 
 create table articles (
   id         int(10) unsigned not null auto_increment primary key,
+  user_id    int(10) unsigned not null DEFAULT 0 comment "用户id",
   cid        int(10) unsigned not null DEFAULT 0 comment "分类ID",
-  title      varchar(255) not null DEFAULT "",
-  description varchar(1000) not null DEFAULT "",
-  body       text not null,
-  user_id    int(10) unsigned not null DEFAULT 0,
+  `order`    int(10) unsigned not null DEFAULT 0 comment "排序",
+  title      varchar(255) not null DEFAULT "" comment "标题",
+  description varchar(1000) not null DEFAULT "" comment "描述",
+  body       text not null comment "内容",
   created_at int(10) unsigned not null DEFAULT 0,
   updated_at int(10) unsigned not null DEFAULT 0,
   deleted_at int(10) unsigned not null DEFAULT 0 

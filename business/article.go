@@ -29,3 +29,8 @@ func DeleteArticle(id int)bool{
 	arts := new(model.Article)
 	return arts.DeleteArticle(id)
 }
+
+func OrderArticle(id,order int)bool{
+	arts := new(model.Article)
+	return arts.OrderArticle(id,order)
+}
