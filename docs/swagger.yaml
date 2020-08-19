@@ -188,16 +188,23 @@ paths:
       description: 给文章快速设置标签，请设置请求格式为json
       parameters:
       - description: 文章id
-        in: path
+        in: body
         name: id
         required: true
-        type: integer
-      - description: 标签id列表
+        schema:
+          type: integer
+      - description: 标签id
         in: body
         name: tag_id
         required: true
         schema:
-          type: array
+          type: integer
+      - description: 动作类型 1添加 2删除
+        in: body
+        name: act_type
+        required: true
+        schema:
+          type: integer
       produces:
       - application/json
       responses:

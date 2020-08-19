@@ -283,19 +283,30 @@ var doc = `{
                 "summary": "文章标签",
                 "parameters": [
                     {
-                        "type": "integer",
                         "description": "文章id",
                         "name": "id",
-                        "in": "path",
-                        "required": true
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
                     },
                     {
-                        "description": "标签id列表",
+                        "description": "标签id",
                         "name": "tag_id",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "type": "array"
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "动作类型 1添加 2删除",
+                        "name": "act_type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
                         }
                     }
                 ],
