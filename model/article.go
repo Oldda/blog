@@ -155,3 +155,25 @@ func (article *Article) OrderArticle(id,order int)bool{
     }
     return true
 }
+
+func(article *Article)QuickSetTag(id,tagId,actType int)bool{
+    var err error
+    taa := new(TagAndArticle)
+    switch actType{
+    case 1://添加
+        taa.ArticleId = id
+        taa.TagId = tagId
+        _,err = engine.Insert(taa)
+        break
+    case 2://删除
+        _,err = engine.Where("tag_id=?",tagId).And("article_id=?",id).Delete(taa)
+        break
+    default:
+        return false
+        break
+    }
+    if err != nil{
+        return false
+    }
+    return true
+}

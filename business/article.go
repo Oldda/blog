@@ -34,3 +34,8 @@ func OrderArticle(id,order int)bool{
 	arts := new(model.Article)
 	return arts.OrderArticle(id,order)
 }
+
+func TagSetArticle(id int,tagId int,actType int)bool{
+	arts := new(model.Article)
+	return arts.QuickSetTag(id,tagId,actType)
+}

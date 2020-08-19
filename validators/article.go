@@ -20,3 +20,9 @@ type UpdateArticleValidator struct{
 	Description string `json:"description" binding:"required,max=255"`
 	Body string `json:"body" binding:"required"`
 }
+
+type QuickSetTagValidator struct{
+	Id int `json:"id" binding:"required"`
+	TagId int `json:"tag_id" binding:"required"`
+	ActionType int `json:"act_type" binding:"required"`
+}

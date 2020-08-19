@@ -176,11 +176,22 @@ func OrderArticle(ctx *gin.Context){
 // @Tags 文章管理
 // @accept json
 // @Produce  json
-// @Param id path int true "文章id"
-// @Param tag_id body array true "标签id列表"
+// @Param id body int true "文章id"
+// @Param tag_id body int true "标签id"
+// @Param act_type body int true "动作类型 1添加 2删除"
 // @Success 200 {object} util.ApiResp
 // @Failure 302 {object} util.ApiResp
 // @Router /admin/article_tag/:id [put]
 func TagSetArticle(ctx *gin.Context){
-
-}
+	var article validators.QuickSetTagValidator
+	if err := ctx.ShouldBindWith(&article,binding.JSON);err != nil{
+		ctx.JSON(util.NewApiResp("PARAMS_VALIDATE_ERR"))
+		return
+	}
+	
+	if !business.TagSetArticle(article.Id,article.TagId,article.ActionType){
+		ctx.JSON(util.NewApiResp("UPDATE_RESOURCE_ERR"))
+		return
+	}
+	ctx.JSON(util.NewApiResp("SUCCESS"))
+} 

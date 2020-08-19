@@ -3,6 +3,7 @@ package util
 import(
 	"time"
     "math/rand"
+    "encoding/json"
 )
 
 //生成随机字符串
@@ -19,4 +20,17 @@ func GetRandStr(n int) (randStr string) {
         randStr += chars[randIndex : randIndex+1]
     }
     return randStr
+}
+
+/**
+    json和go数据类型的转换
+**/
+// json转map
+func JSONToMap(jsonStr string) (map[string]interface{},error) {
+
+    var tempMap map[string]interface{}
+
+    err := json.Unmarshal([]byte(jsonStr), &tempMap)
+
+    return tempMap,err
 }

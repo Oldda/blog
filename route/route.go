@@ -53,6 +53,9 @@ func API(svr *gin.Engine){
 			bak.PUT("article_order/:id",ctrls.OrderArticle)
 			bak.PUT("article_tag/:id",ctrls.TagSetArticle)
 		}
+
+		//前台展示
+		api.GET("/",func(ctx *gin.Context){})
 	}
 
 	//注册自定义验证器--gin默认的v8验证器有错误，报没有实例化validator的错误。
